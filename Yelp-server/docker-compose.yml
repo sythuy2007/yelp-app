@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  node-app:
+    build: .
+    networks:
+      - app-network
+    ports:
+      - "3001:3001"
+  website-app:
+    build: /home/chaunm/yelp/client/
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+networks:
+   app-network:

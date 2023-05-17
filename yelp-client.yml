@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yelp-client
+spec:
+  type: LoadBalancer
+  selector:
+    app: yelp-client
+  ports:
+  - port: 80
+   
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yelp-client
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yelp-client
+  template:
+    metadata:
+      labels:
+        app: yelp-client
+    spec:
+      containers:
+      - name: yelp-client
+        image: sythuy2007/yelp-client
+        imagePullPolicy: "Always"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: yelp-server
+spec:
+  type: LoadBalancer
+  selector:
+    app: yelp-server
+  ports:
+  - port: 3001
+    targetPort: 3001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yelp-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yelp-server
+  template:
+    metadata:
+      labels:
+        app: yelp-server
+    spec:
+      containers:
+      - name: yelp-server
+        image: sythuy2007/yelp-server
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 3001
