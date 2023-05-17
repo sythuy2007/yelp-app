@@ -26,13 +26,13 @@ pipeline {
                         sh 'npm run test'
                     }
             }
-
+        }
         stage ('Build Images') {
                 steps {
                     sh 'docker build -t sythuy2007/yelp-client:latest client'
                     sh 'docker build -t sythuy2007/yelp-server:latest server'
             }
+        }   
 }
 }
-}
-}
+
