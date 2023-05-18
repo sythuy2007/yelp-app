@@ -1,9 +1,5 @@
 pipeline {
-    agent none { 
-        node {
-            label 'docker-agent-node'
-            }
-}
+    agent none        
     triggers {
         pollSCM 'H/5 * * * *'
     }
