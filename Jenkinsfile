@@ -32,8 +32,8 @@ pipeline {
         stage ('Build Images') {
             agent { label 'docker-agent-docker' }
                 steps {
-                    sh 'docker build -t sythuy2007/yelp-client:latest client'
-                    sh 'docker build -t sythuy2007/yelp-server:latest server'
+                    sh 'docker build -t sythuy2007/yelp-client:latest Yelp-client'
+                    sh 'docker build -t sythuy2007/yelp-server:latest Yelp-server'
             }
         }   
 }
