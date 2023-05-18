@@ -1,5 +1,5 @@
 pipeline {
-    agent { 
+    agent none { 
         node {
             label 'docker-agent-node'
             }
@@ -9,12 +9,14 @@ pipeline {
     }
     stages {
 		stage ('Checkout') {
+            agent { label 'docker-agent-node' }
 			steps {
 				checkout scm
 			}
 		}
 
         stage ('Client Tests') {
+            agent { label 'docker-agent-node' }
                 steps {
                     dir('Yelp-client') {
                         sh 'npm install'
@@ -23,6 +25,7 @@ pipeline {
             }
         }
         stage ('Server Tests') {
+            agent { label 'docker-agent-node' }
                 steps {
                     dir('Yelp-server') {
                         sh 'npm install'
@@ -31,6 +34,7 @@ pipeline {
             }
         }
         stage ('Build Images') {
+            agent { label 'docker-agent-docker' }
                 steps {
                     sh 'docker build -t sythuy2007/yelp-client:latest client'
                     sh 'docker build -t sythuy2007/yelp-server:latest server'
